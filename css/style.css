@@ -253,17 +253,19 @@ li:last-child{ margin-bottom: 0; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 600;
-  font-size: .92rem;
-  color: #fdf8ec;
+  background: #fdf8ec;
+  box-shadow: inset 0 0 0 1px var(--border);
+  padding: 5px;
 }
-.edu-icon--mit{ background: #8a1a2b; }
-.edu-icon--columbia{ background: #1a4480; }
+.edu-icon img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 .edu-card__years{
   font-size: .85rem;
   font-style: italic;
