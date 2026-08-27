@@ -195,8 +195,6 @@ li:last-child{ margin-bottom: 0; }
   font-weight: 400;
   margin-left: 10px;
 }
-.hero__nick::before{ content: "\201C"; }
-.hero__nick::after{ content: "\201D"; }
 .hero__role{
   font-size: clamp(1.05rem, 1.6vw, 1.2rem);
   color: var(--text);
@@ -244,11 +242,33 @@ li:last-child{ margin-bottom: 0; }
   border-radius: var(--radius);
   padding: 18px 20px;
 }
+.edu-card__top{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.edu-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: .92rem;
+  color: #fdf8ec;
+}
+.edu-icon--mit{ background: #8a1a2b; }
+.edu-icon--columbia{ background: #1a4480; }
 .edu-card__years{
   font-size: .85rem;
   font-style: italic;
   color: var(--accent);
-  margin: 0 0 6px;
+  margin: 0;
 }
 .edu-card h3{ font-size: 1.1rem; margin-bottom: 4px; }
 .edu-card p{ margin: 0; color: var(--text-muted); font-size: .95rem; }
@@ -300,6 +320,7 @@ li:last-child{ margin-bottom: 0; }
   color: var(--accent);
 }
 .tag--muted{ background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+a.tag--muted:hover{ border-color: var(--accent); color: var(--accent); text-decoration: none; }
 .project-card h3{ font-size: 1.45rem; }
 .project-card__sub{ color: var(--text-muted); font-size: .92rem; margin: -4px 0 0; font-style: italic; }
 .project-card p:not(.project-card__sub){ color: var(--text); font-size: .98rem; margin: 0; }
@@ -335,6 +356,52 @@ li:last-child{ margin-bottom: 0; }
   border: 1px solid var(--border);
   background: var(--bg-elevated);
   color: var(--text);
+}
+
+.hobbies{
+  margin: 28px 0 0;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  max-width: 62ch;
+}
+.hobbies a{ margin-left: 4px; }
+
+/* ---------- Gallery (Creative Works page) ---------- */
+.page-intro{
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 62ch;
+  margin: 0 0 40px;
+}
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+.gallery__item{
+  margin: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.gallery__item img{
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+.gallery__item figcaption{
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+.back-link{ display: inline-block; margin-bottom: 30px; font-style: italic; }
+
+@media (max-width: 760px){
+  .gallery{ grid-template-columns: 1fr; }
 }
 
 /* ---------- Contact ---------- */
