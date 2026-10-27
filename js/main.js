@@ -32,3 +32,20 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
+
+(function () {
+  var views = document.getElementById('charlie-views');
+  var reports = document.getElementById('charlie-reports');
+  if (!views || !reports) return;
+  var base = 'https://charlie-card-hunt-boston.warmmaple17.chatgpt.site';
+  function read(path) { return fetch(base + path).then(function (r) { if (!r.ok) throw new Error('Unavailable'); return r.json(); }); }
+  read('/api/traffic').then(function (data) {
+    if (!Array.isArray(data.rows)) return;
+    var count = data.rows.reduce(function (sum, row) { return sum + (Number(row.views) || 0); }, 0);
+    views.textContent = count.toLocaleString();
+  }).catch(function () {});
+  read('/api/reports').then(function (data) {
+    if (!Array.isArray(data.reports)) return;
+    reports.textContent = data.reports.filter(function (r) { return r.source === 'community'; }).length.toLocaleString();
+  }).catch(function () {});
+})();
