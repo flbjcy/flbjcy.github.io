@@ -456,3 +456,15 @@ a.tag--muted:hover{ border-color: var(--accent); color: var(--accent); text-deco
 .charlie-project__cards img{display:block;width:100%;height:auto;aspect-ratio:1.6;object-fit:cover;border-radius:7px;box-shadow:0 3px 10px #0002}
 .charlie-project__figure figcaption{text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:16px}
 @media(max-width:700px){.project-card--charlie{grid-template-columns:1fr;gap:24px}.charlie-project__figure{max-width:420px;width:100%;box-sizing:border-box;justify-self:center}}
+
+/* Four projects in a balanced two-by-two grid. */
+.project-card--charlie{grid-column:auto;display:flex;gap:14px}
+.charlie-project__copy{gap:10px}
+.charlie-project__figure{padding:12px;width:100%;margin-top:auto}
+.charlie-project__cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.charlie-project__figure figcaption{margin-top:10px}
+.charlie-project__stats{gap:12px 20px}
+.charlie-project__stats dd{font-size:1.5rem}
+.project-image-link{display:block;margin:4px 0 8px}
+.project-image{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--border)}
+@media(max-width:700px){.project-card--charlie{display:flex}.charlie-project__figure{max-width:none}}
