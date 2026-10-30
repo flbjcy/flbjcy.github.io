@@ -36,27 +36,47 @@
 (function () {
   var views = document.getElementById('charlie-views');
   var reports = document.getElementById('charlie-reports');
-  if (!views || !reports) return;
-  var base = 'https://charlie-card-hunt-boston.warmmaple17.chatgpt.site';
   var reviewed = document.getElementById('charlie-reviewed');
   var reviewDate = document.getElementById('charlie-review-date');
-  fetch('https://raw.githubusercontent.com/flbjcy/find-my-charlie/main/lib/reviewed-status.json', {cache: 'no-store'}).then(function (r) { if (!r.ok) throw new Error('Unavailable'); return r.json(); }).then(function (data) {
-    var count = data.lastExpandedAccessibleCount;
-    var stamp = data.lastExpandedReviewAt;
-    if (!reviewed || !Number.isFinite(count) || !stamp) return;
-    reviewed.textContent = count.toLocaleString();
-    reviewed.title = 'Accessible comments checked in the latest expanded review; incremental checks may cover fewer comments.';
-    var date = new Date(stamp);
-    if (reviewDate && !isNaN(date.getTime())) reviewDate.textContent = 'Latest expanded Reddit review: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET. Statistics update when this page loads.';
-  }).catch(function () {});
-  function read(path) { return fetch(base + path).then(function (r) { if (!r.ok) throw new Error('Unavailable'); return r.json(); }); }
-  read('/api/traffic').then(function (data) {
-    if (!Array.isArray(data.rows)) return;
-    var count = data.rows.reduce(function (sum, row) { return sum + (Number(row.views) || 0); }, 0);
-    views.textContent = count.toLocaleString();
-  }).catch(function () {});
-  read('/api/reports').then(function (data) {
-    if (!Array.isArray(data.reports)) return;
-    reports.textContent = data.reports.filter(function (r) { return r.source === 'community'; }).length.toLocaleString();
-  }).catch(function () {});
+  var status = document.getElementById('charlie-stats-status');
+  if (!views || !reports) return;
+  var base = 'https://charlie-card-hunt-boston.flbjcy.chatgpt.site';
+  var pending = false;
+  function read(url) {
+    return fetch(url, {cache: 'no-store'}).then(function (r) {
+      if (!r.ok) throw new Error('Unavailable');
+      return r.json();
+    });
+  }
+  function refresh() {
+    if (pending) return;
+    pending = true;
+    var activity = read(base + '/api/stats/hourly').then(function (data) {
+      if (!Array.isArray(data.hours) || !data.hours.length) throw new Error('Unavailable');
+      var totals = data.hours.reduce(function (sum, hour) {
+        if (!Number.isFinite(hour.views) || !Number.isFinite(hour.communityReports)) throw new Error('Unavailable');
+        sum.views += hour.views;
+        sum.reports += hour.communityReports;
+        return sum;
+      }, {views: 0, reports: 0});
+      views.textContent = totals.views.toLocaleString();
+      reports.textContent = totals.reports.toLocaleString();
+      reports.title = 'Total community submissions, including historical and withdrawn reports.';
+      if (status) status.textContent = 'Live totals · updated ' + new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) + ' · refreshes every minute while this page is visible.';
+    }).catch(function () {
+      if (status) status.textContent = views.textContent === '—' ? 'Live totals are temporarily unavailable.' : 'Showing the last loaded totals; retrying automatically.';
+    });
+    var audit = read('https://raw.githubusercontent.com/flbjcy/find-my-charlie/main/lib/reviewed-status.json').then(function (data) {
+      var count = data.lastExpandedAccessibleCount;
+      var date = new Date(data.lastExpandedReviewAt);
+      if (!reviewed || !Number.isFinite(count) || isNaN(date.getTime())) return;
+      reviewed.textContent = count.toLocaleString();
+      reviewed.title = 'Accessible comments in the latest expanded Reddit review. Incremental checks may cover fewer comments.';
+      if (reviewDate) reviewDate.textContent = 'Latest expanded Reddit review: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET.';
+    }).catch(function () {});
+    Promise.all([activity, audit]).finally(function () { pending = false; });
+  }
+  refresh();
+  setInterval(function () { if (!document.hidden) refresh(); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) refresh(); });
 })();
