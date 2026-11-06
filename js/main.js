@@ -66,14 +66,16 @@
     }).catch(function () {
       if (status) status.textContent = views.textContent === '—' ? 'Live totals are temporarily unavailable.' : 'Showing the last loaded totals; retrying automatically.';
     });
-    var audit = read('https://raw.githubusercontent.com/flbjcy/find-my-charlie/main/lib/reviewed-status.json').then(function (data) {
-      var count = data.lastExpandedAccessibleCount;
-      var date = new Date(data.lastExpandedReviewAt);
-      if (!reviewed || !Number.isFinite(count) || isNaN(date.getTime())) return;
+    var audit = read('https://raw.githubusercontent.com/flbjcy/find-my-charlie/main/lib/reviewed-status.json?minute=' + Math.floor(Date.now() / 60000)).then(function (data) {
+      var count = data.reviewedCount;
+      var date = new Date(data.checkedAt);
+      if (!reviewed || !Number.isFinite(count) || !Number.isFinite(data.threadCount) || isNaN(date.getTime())) throw new Error('Invalid review status');
       reviewed.textContent = count.toLocaleString();
-      reviewed.title = 'Accessible comments in the latest expanded Reddit review. Incremental checks may cover fewer comments.';
-      if (reviewDate) reviewDate.textContent = 'Latest expanded Reddit review: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET.';
-    }).catch(function () {});
+      reviewed.title = 'Accessible comments checked in the latest recorded review, not a cumulative total.';
+      if (reviewDate) reviewDate.textContent = 'Latest Reddit check: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET · ' + data.threadCount + ' tracked threads. ' + (data.fullCoverage ? 'Full review.' : 'Incremental review; older/deep coverage remains incomplete.');
+    }).catch(function () {
+      if (reviewDate && reviewed.textContent === '—') reviewDate.textContent = 'Review status is temporarily unavailable; retrying automatically.';
+    });
     Promise.all([activity, audit]).finally(function () { pending = false; });
   }
   refresh();
