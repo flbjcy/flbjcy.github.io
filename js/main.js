@@ -72,7 +72,7 @@
       if (!reviewed || !Number.isFinite(count) || !Number.isFinite(data.threadCount) || isNaN(date.getTime())) throw new Error('Invalid review status');
       reviewed.textContent = count.toLocaleString();
       reviewed.title = 'Unique Reddit comments reviewed across all saved checks. Repeated checks and edits count once.';
-      if (reviewDate) reviewDate.textContent = 'Latest Reddit check: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET · ' + data.reviewedCount + ' comments checked across ' + data.threadCount + ' tracked threads this run. ' + (data.fullCoverage ? 'Full review.' : 'Incremental review; older/deep coverage remains incomplete.');
+      if (reviewDate) reviewDate.textContent = 'Latest Reddit check: ' + date.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' ET.';
     }).catch(function () {
       if (reviewDate && reviewed.textContent === '—') reviewDate.textContent = 'Review status is temporarily unavailable; retrying automatically.';
     });
