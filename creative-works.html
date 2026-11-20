@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -48,6 +49,18 @@
     </p>
     <div class="gallery">
       <figure class="gallery__item">
+        <a class="gallery__map-link" href="assets/img/hand-drawn-subway-map.svg" target="_blank" rel="noopener" aria-label="Open my hand-drawn subway map at full size">
+          <img class="gallery__drawing" src="assets/img/hand-drawn-subway-map.svg" alt="My hand-drawn Beijing subway map, with handwritten station names and routes">
+        </a>
+        <figcaption><strong>Hand-drawn subway map</strong>A subway map I drew by hand. Click the image to explore it in full size.</figcaption>
+      </figure>
+      <figure class="gallery__item">
+        <div id="travel-map" class="travel-map" role="region" aria-label="Interactive map of my train and flight journeys" aria-describedby="travel-map-caption">
+          <p class="travel-map__fallback">Explore the world on <a href="https://www.openstreetmap.org/">OpenStreetMap</a>.</p>
+        </div>
+        <figcaption id="travel-map-caption"><strong>My journeys by rail and air</strong>A growing map of the trains and flights I have taken. Routes coming soon.</figcaption>
+      </figure>
+      <figure class="gallery__item">
         <img src="assets/img/boston-t-map.jpg" alt="MBTA Rapid Transit and Frequent Bus Routes map of Boston">
         <figcaption>Boston's MBTA rapid transit map. Trying to memorize it.</figcaption>
       </figure>
@@ -64,5 +77,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="js/travel-map.js"></script>
 </body>
 </html>

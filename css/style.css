@@ -398,6 +398,26 @@ a.tag--muted:hover{ border-color: var(--accent); color: var(--accent); text-deco
   color: var(--text-muted);
   border-top: 1px solid var(--border);
 }
+.gallery__item figcaption strong{
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-style: normal;
+}
+.gallery__map-link{ display: block; }
+.gallery__item .gallery__drawing{ object-fit: contain; }
+.travel-map{
+  height: 320px;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  background: var(--bg-elevated);
+  font-family: var(--font-body);
+}
+.travel-map__fallback{ padding: 24px; margin: 0; }
+.travel-map .leaflet-tile{ max-width: none; height: 256px; }
+.travel-map .leaflet-control-attribution{ font-family: Arial, sans-serif; }
 .back-link{ display: inline-block; margin-bottom: 30px; font-style: italic; }
 
 @media (max-width: 760px){
