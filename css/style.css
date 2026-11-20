@@ -364,7 +364,6 @@ a.tag--muted:hover{ border-color: var(--accent); color: var(--accent); text-deco
   margin: 28px 0 0;
   color: var(--text-muted);
   font-size: 1.02rem;
-  max-width: 62ch;
 }
 .hobbies a{ margin-left: 4px; }
 
