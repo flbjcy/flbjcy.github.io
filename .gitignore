@@ -1,2 +1,6 @@
 .claude/
 .DS_Store
+*.xlsx
+*.xls
+~$*
+__pycache__/

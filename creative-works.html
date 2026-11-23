@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -55,17 +55,24 @@
         <figcaption><strong>Hand-drawn subway map</strong>A subway map I drew by hand. Click the image to explore it in full size.</figcaption>
       </figure>
       <figure class="gallery__item">
-        <div id="travel-map" class="travel-map" role="region" aria-label="Interactive map of my train and flight journeys" aria-describedby="travel-map-caption">
+        <div class="travel-map-preview">
+        <a class="travel-map-open" href="travel-map.html" aria-label="Explore my train and flight journeys"><span>Explore journeys</span></a>
+        <div id="travel-map" data-preview="true" class="travel-map" role="region" aria-label="Interactive map of my train and flight journeys" aria-describedby="travel-map-caption">
           <p class="travel-map__fallback">Explore the world on <a href="https://www.openstreetmap.org/">OpenStreetMap</a>.</p>
         </div>
-        <figcaption id="travel-map-caption"><strong>My journeys by rail and air</strong>A growing map of the trains and flights I have taken. Routes coming soon.</figcaption>
+        </div>
+        <figcaption id="travel-map-caption"><strong>My journeys by rail and air</strong>My travels, mapped. Click to explore flights and railway journeys.</figcaption>
       </figure>
       <figure class="gallery__item">
+        <a class="gallery__map-link" href="assets/img/boston-t-map.jpg" target="_blank" rel="noopener" aria-label="Open Boston subway map at full size">
         <img src="assets/img/boston-t-map.jpg" alt="MBTA Rapid Transit and Frequent Bus Routes map of Boston">
+        </a>
         <figcaption>Boston's MBTA rapid transit map. Trying to memorize it.</figcaption>
       </figure>
       <figure class="gallery__item">
+        <a class="gallery__map-link" href="assets/img/mostar-bridge.jpg" target="_blank" rel="noopener" aria-label="Open Mostar Bridge paper model at full size">
         <img src="assets/img/mostar-bridge.jpg" alt="Hand-assembled paper model of the Mostar Bridge">
+        </a>
         <figcaption>A paper puzzle of the Mostar Bridge, assembled without glue or tools.</figcaption>
       </figure>
     </div>
@@ -78,6 +85,6 @@
 
 <script src="js/main.js"></script>
 <script src="assets/vendor/leaflet/leaflet.js"></script>
-<script src="js/travel-map.js"></script>
+<script src="js/travel-map.js?v=2"></script>
 </body>
 </html>

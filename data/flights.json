@@ -1,0 +1,82 @@
+{
+  "airports": {
+    "JFK": {
+      "name": "New York · John F. Kennedy",
+      "point": [
+        40.6413,
+        286.2219
+      ]
+    },
+    "PEK": {
+      "name": "Beijing Capital",
+      "point": [
+        40.0799,
+        116.6031
+      ]
+    },
+    "MFM": {
+      "name": "Macau",
+      "point": [
+        22.1496,
+        113.5916
+      ]
+    },
+    "TPE": {
+      "name": "Taipei Taoyuan",
+      "point": [
+        25.0797,
+        121.2342
+      ]
+    }
+  },
+  "flights": [
+    {
+      "number": "CA982",
+      "date": "2026-07-14",
+      "from": "JFK",
+      "to": "PEK",
+      "airline": "Air China",
+      "aircraft": "Boeing 747-8",
+      "registration": "B-2486",
+      "seat": "58A",
+      "departure": "July 14, 02:40 EDT (UTC−4)",
+      "arrival": "July 15, 06:00 CST (UTC+8)"
+    },
+    {
+      "number": "NX07",
+      "date": "2025-07-20",
+      "from": "PEK",
+      "to": "MFM",
+      "airline": "Air Macau",
+      "aircraft": null,
+      "registration": null,
+      "seat": "30A",
+      "departure": null,
+      "arrival": null
+    },
+    {
+      "number": "BR802",
+      "date": "2026-07-25",
+      "from": "MFM",
+      "to": "TPE",
+      "airline": "EVA Air",
+      "aircraft": "Boeing 787-9",
+      "registration": "B-17881",
+      "seat": null,
+      "departure": "July 25, 13:40 CST (UTC+8)",
+      "arrival": "July 25, 14:55 CST (UTC+8)"
+    },
+    {
+      "number": "BR032",
+      "date": "2026-07-25",
+      "from": "TPE",
+      "to": "JFK",
+      "airline": "EVA Air",
+      "aircraft": null,
+      "registration": null,
+      "seat": null,
+      "departure": null,
+      "arrival": null
+    }
+  ]
+}
