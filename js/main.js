@@ -60,8 +60,10 @@
         return sum;
       }, {views: 0, reports: 0});
       views.textContent = totals.views.toLocaleString();
-      reports.textContent = totals.reports.toLocaleString();
-      reports.title = 'Total community submissions, including historical and withdrawn reports.';
+      var hasActivity = data.community && Number.isFinite(data.community.activityCount) && Number.isFinite(data.community.retractionCount);
+      var activityCount = hasActivity ? data.community.activityCount : totals.reports;
+      reports.textContent = activityCount.toLocaleString();
+      reports.title = hasActivity ? data.community.submittedCount.toLocaleString() + ' submissions (including unavailable) + ' + data.community.retractionCount.toLocaleString() + ' user removals. Each submission and its removal count separately.' : 'Community submissions; activity breakdown is loading.';
       if (status) status.textContent = 'Live totals · updated ' + new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) + ' · refreshes every minute while this page is visible.';
     }).catch(function () {
       if (status) status.textContent = views.textContent === '—' ? 'Live totals are temporarily unavailable.' : 'Showing the last loaded totals; retrying automatically.';
